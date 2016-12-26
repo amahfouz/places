@@ -1,29 +1,23 @@
 import React, { Component, PropTypes } from 'react';
 import { ScrollView } from 'react-native';
-import { Content, List, ListItem, Text } from 'native-base';
-
-import PlacesService from './PlacesService.js';
+import { Content, List, ListItem, Text, Input, InputGroup } from 'native-base';
 
 // view for editing properties of a place
-export default class ReadOnlyPlaceView extends Component {
+export default class EditPlaceView extends Component {
   static propTypes = {
-    placeIndex : PropTypes.number.isRequired
+    place: PropTypes.object.isRequired
   }
 
   render() {
-    let service = new PlacesService();
-    let place = service.getByIndex(this.props.placeIndex);
-
     return (
       <ScrollView>
-        <Content>
-            <List>
-              <ListItem>
-                <Text>{place.notes}</Text>
-              </ListItem>
-            </List>
-        </Content>
+          <Text>{this.props.place.name}</Text>
+          <InputGroup>
+            <Input borderType='regular' value={this.props.place.name} />
+          </InputGroup>
       </ScrollView>
     );
   }
 }
+
+// place.notes
