@@ -41,8 +41,16 @@ export default class PlacesMainController extends Component {
           onLeftButtonPress: () => {
             this.refs.navigator.pop()
           },
+          rightButtonTitle: 'Done',
+          onRightButtonPress: () => {
+            if (this.editView) {
+              this.refs.navigator.pop()
+              console.log(this.editView.props.place)
+            }
+          },
           passProps: {
-            place : store.getState().newPlace
+            place : store.getState().newPlace,
+            ref: (component) => {this.editView = component},
           }
         });
       }
