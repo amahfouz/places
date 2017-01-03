@@ -15,7 +15,8 @@
     "react-native-modal-picker": "0.0.16",
     "react-native-vector-icons": "^3.0.0",
     "react-redux": "^5.0.1",
-    "redux": "^3.6.0"
+    "redux": "^3.6.0",
+    "redux-saga": "^0.14.1"
   },
   "devDependencies": {
     "babel-jest": "18.0.0",
