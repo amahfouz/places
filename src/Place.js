@@ -32,7 +32,20 @@ export default class Place {
     }
   }
 
+  setSimpleProps(props) {
+    this.name = props.name;
+    this.notes = props.notes;
+    this.enabled = props.enabled;
+    this.proximity = props.proximity;
+  }
+
+  static PROXIMITY__NEAR = "NEAR";
   static PROXIMITY__ARRIVE = "ARRIVE";
   static PROXIMITY__LEAVE = "LEAVE";
-  static PROXIMITY__AT = "AT";
+
+  static PROXIMITY__OPTIONS = [
+      { key: Place.PROXIMITY__NEAR, label: "I am NEARBY"},
+      { key: Place.PROXIMITY__ARRIVE, label: "I ARRIVE"},
+      { key: Place.PROXIMITY__LEAVE, label: "I LEAVE"},
+  ];
 }

@@ -36,7 +36,7 @@ export default class PlacesMainController extends Component {
 
         this.refs.navigator.push({
           component: EditPlaceView,
-          title: store.getState().newPlace.location.name,
+          title: store.getState().newPlace.name,
           leftButtonTitle: 'Cancel',
           onLeftButtonPress: () => {
             this.refs.navigator.pop()
@@ -45,7 +45,9 @@ export default class PlacesMainController extends Component {
           onRightButtonPress: () => {
             if (this.editView) {
               this.refs.navigator.pop()
-              console.log(this.editView.props.place)
+              let editedPlace = this.editView.getResult();
+              console.log(JSON.stringify(editedPlace));
+              store.dispatch(factory.createAddPlaceAction(editedPlace));
             }
           },
           passProps: {

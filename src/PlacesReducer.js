@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux'
 import * as constants from './PlacesActions.js'
+import Place from './Place.js'
 
 // reducer for the places array
 function places(state = [], action) {
@@ -16,11 +17,12 @@ function places(state = [], action) {
 function newPlace(state = {}, action) {
   switch (action.type) {
     case constants.PICK_LOCATION:
-      let result = Object.assign({}, state, {
-        location: action.location
-      });
-      result.name = action.location.name;
-      return result;
+      return new Place(action.location)
+      // let result = Object.assign({}, state, {
+      //   location: action.location
+      // });
+      // result.name = action.location.name;
+      // return result;
     default:
       console.log("Unrecognized action in newPlace: " + action.type);
       return state;

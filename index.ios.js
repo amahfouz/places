@@ -3,22 +3,14 @@ import { AppRegistry } from 'react-native';
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 
+import Place from './src/Place.js'
 import PlacesMainController from './src/PlacesMainController.js'
 import placesState from './src/PlacesReducer.js'
-import InteractivePlacesList from './src/InteractivePlacesList'
 
-const initialPlaces = [
-  {
-    'name'  : 'Costco',
-    'notes' : 'Kitchen Towels\nBottled Water\nBananas',
-    'icon'  : 'ios-person'
-  },
-  {
-    'name'  : 'Ralph',
-    'notes' : 'Pickup medication\n Diet Coke\n Stamps',
-    'icon'  : 'ios-settings'
-  }
-];
+const initialPlace = new Place({});
+initialPlace.name  = 'Costco';
+initialPlace.notes = 'Kitchen Towels\nBottled Water\nBananas'
+const initialPlaces = [ initialPlace ];
 
 // create a redux store
 const store = createStore(placesState, { places: initialPlaces });
