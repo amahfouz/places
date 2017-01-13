@@ -32,8 +32,6 @@ export default class PlacesMainController extends Component {
 
         store.dispatch(factory.createSelectLocationAction(response))
 
-        console.log("State:" + JSON.stringify(store.getState()))
-
         this.refs.navigator.push({
           component: EditPlaceView,
           title: store.getState().newPlace.name,
@@ -46,7 +44,6 @@ export default class PlacesMainController extends Component {
             if (this.editView) {
               this.refs.navigator.pop()
               let editedPlace = this.editView.getResult();
-              console.log(JSON.stringify(editedPlace));
               store.dispatch(factory.createAddPlaceAction(editedPlace));
             }
           },

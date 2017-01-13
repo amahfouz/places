@@ -1,6 +1,9 @@
-import { combineReducers } from 'redux'
+import { combineReducers, createStore, applyMiddleware } from 'redux'
+import createSagaMiddleware from 'redux-saga'
+
 import * as constants from './PlacesActions.js'
 import Place from './Place.js'
+import { rootSaga } from './PlacesSaga.js'
 
 // reducer for the places array
 function places(state = [], action) {
@@ -44,10 +47,31 @@ function nav(state = {}, action) {
   }
 }
 
-const placesState = combineReducers({
+const placesReducer = combineReducers({
   nav,
   newPlace,
   places
-});
+})
 
-export default placesState
+const sagaMiddleware = createSagaMiddleware()
+
+function createPlacesStore(initialState) {
+  let store = createStore(
+    placesReducer,
+    initialState,
+    applyMiddleware(sagaMiddleware)
+  );
+
+  // start the places processor
+  const rootTask = sagaMiddleware.run(rootSaga)
+
+  rootTask.done.catch(function(error) {
+    console.log("Global catch: ---------------------------------" )
+  })
+
+  //console.log("REDUX SAGA TASK:" + task.isRunning() + "," + task.result())
+
+  return store
+}
+
+export default createPlacesStore

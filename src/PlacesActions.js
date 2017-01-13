@@ -1,8 +1,9 @@
 // actions for modifying the redux store
 
-export const ADD_PLACE = 'add-place-action-type';
-export const SELECT_PLACE = 'select-place-action-type';
-export const PICK_LOCATION = 'select-location';
+export const ADD_PLACE = 'add-place-action-type'
+export const SELECT_PLACE = 'select-place-action-type'
+export const PICK_LOCATION = 'select-location'
+export const CAPTURE_GEO_POSITION = 'record-geo-position'
 
 export function createSelectPlaceAction(selectedIndex) {
   return {
@@ -24,5 +25,13 @@ export function createSelectLocationAction(locationObj) {
   return {
     type : PICK_LOCATION,
     location : locationObj
+  }
+}
+
+export function createGeoCaptureAction(geoPosition) {
+  // action triggered upon capturing the geo location
+  return {
+    type : CAPTURE_GEO_POSITION,
+    position : geoPosition
   }
 }
