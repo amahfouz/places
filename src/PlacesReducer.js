@@ -3,7 +3,7 @@ import createSagaMiddleware from 'redux-saga'
 
 import * as constants from './PlacesActions.js'
 import Place from './Place.js'
-import { rootSaga } from './PlacesSaga.js'
+import { initSagas } from './RootSaga.js'
 
 // reducer for the places array
 function places(state = [], action) {
@@ -62,6 +62,7 @@ function createPlacesStore(initialState) {
     applyMiddleware(sagaMiddleware)
   );
 
+  initSagas(sagaMiddleware)
   // start the places processor
   const rootTask = sagaMiddleware.run(rootSaga)
 

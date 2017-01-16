@@ -2,6 +2,9 @@
 
 import { put, take, call } from 'redux-saga/effects'
 import { channel } from 'redux-saga'
+import { Geo } from 'geo-nearby'
+
+import { nearbySaga } from './NearbySaga.js'
 
 // single entry point to start all sagas at once
 export function* rootSaga() {
@@ -9,8 +12,20 @@ export function* rootSaga() {
   const ch = yield call(createLocationChannel)
 
   while (true) {
-    const pos = yield take(ch)
-    yield put({type : "some action type", position : pos})
+    const loc = yield take(ch)
+
+    // see geo-nearby module for docs
+    const locations = places.map((item) => {
+      let loc = item.location;
+      return [loc.latitude, loc.longitude, loc.google_id]
+    })
+
+    const geoData = new Geo(Geo.createCompactSet(locations));
+
+    // find places within 200 meters
+    const nearbyPlaces = geoData.nearby(loc.latitude, loc.longitude, 200);
+
+    yield call(nearbySaga, nearbyPlaces)
   }
 }
 
