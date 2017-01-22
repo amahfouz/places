@@ -5,11 +5,12 @@ target 'places' do
   # Uncomment the next line if you're using Swift or would like to use dynamic frameworks
   use_frameworks!
 
-  # Pods for maptest
-  
-  pod 'GooglePlacePicker', '= 2.0.1'
-  pod 'GooglePlaces', '= 2.0.1'
-  pod 'GoogleMaps', '= 2.0.1'
+  # Pods for places
+
+  target 'placesTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
 
 end
 

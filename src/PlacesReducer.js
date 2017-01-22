@@ -3,7 +3,7 @@ import createSagaMiddleware from 'redux-saga'
 
 import * as constants from './PlacesActions.js'
 import Place from './Place.js'
-import { initSagas } from './RootSaga.js'
+import initSagas from './RootSaga.js'
 
 // reducer for the places array
 function places(state = [], action) {
@@ -11,7 +11,7 @@ function places(state = [], action) {
     case constants.ADD_PLACE:
       return [...state, action.place];
     default:
-      console.log("Unrecognized action in places: " + action.type);
+      //console.log("Unrecognized action in places: " + action.type);
       return state;
   }
 }
@@ -27,7 +27,7 @@ function newPlace(state = {}, action) {
       // result.name = action.location.name;
       // return result;
     default:
-      console.log("Unrecognized action in newPlace: " + action.type);
+      //console.log("Unrecognized action in newPlace: " + action.type);
       return state;
   }
 }
@@ -42,7 +42,7 @@ function nav(state = {}, action) {
       console.log("New nav state: " + JSON.stringify(updated))
       return updated;
     default:
-      console.log("Unrecognized action in nav: " + action.type);
+      //console.log("Unrecognized action in nav: " + action.type);
       return state;
   }
 }
@@ -53,24 +53,20 @@ const placesReducer = combineReducers({
   places
 })
 
-const sagaMiddleware = createSagaMiddleware()
-
 function createPlacesStore(initialState) {
+
+  console.log("Creating saga middleware.")
+  const sagaMiddleware = createSagaMiddleware()
+
+  console.log("Creating placecs store.")
   let store = createStore(
     placesReducer,
     initialState,
     applyMiddleware(sagaMiddleware)
   );
 
+  console.log("Initializing sagas.")
   initSagas(sagaMiddleware)
-  // start the places processor
-  const rootTask = sagaMiddleware.run(rootSaga)
-
-  rootTask.done.catch(function(error) {
-    console.log("Global catch: ---------------------------------" )
-  })
-
-  //console.log("REDUX SAGA TASK:" + task.isRunning() + "," + task.result())
 
   return store
 }

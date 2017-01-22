@@ -7,7 +7,7 @@ import { Geo } from 'geo-nearby'
 import { nearbySaga } from './NearbySaga.js'
 
 // single entry point to start all sagas at once
-export function* rootSaga() {
+export default function* locationSaga() {
   console.log("Initializing location consumer.");
   const ch = yield call(createLocationChannel)
 
