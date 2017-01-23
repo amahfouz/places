@@ -10,6 +10,7 @@ export default class PlacesListView extends Component {
 
   static propTypes = {
     places: PropTypes.array.isRequired,
+    isNearBy: PropTypes.func.isRequired,
     itemClickHandler: PropTypes.func.isRequired
   }
 
@@ -24,6 +25,7 @@ export default class PlacesListView extends Component {
                       key={index+1}
                       place={item}
                       index={index}
+                      isNear={this.props.isNearBy(item.location.google_id)}
                       clickHandler={this.props.itemClickHandler}>
                    </PlaceListItem  >)
                 )

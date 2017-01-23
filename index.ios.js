@@ -12,10 +12,18 @@ import createPlacesStore from './src/PlacesReducer.js'
 const initialPlace = new Place({});
 initialPlace.name  = 'Costco';
 initialPlace.notes = 'Kitchen Towels\nBottled Water\nBananas'
+initialPlace.location = {
+  longitude: -118.00,
+  latitude: 34.003,
+  google_id: 'DFSASSDFAGFHGHDJGJ'
+}
 const initialPlaces = [ initialPlace ];
 
 // create a redux store
-const store = createPlacesStore({ places: initialPlaces });
+const store = createPlacesStore({
+  places: initialPlaces,
+  nearbyPlaces: new Set()
+});
 
 // entry point
 export default class places extends Component {

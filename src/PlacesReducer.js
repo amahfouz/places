@@ -47,12 +47,44 @@ function nav(state = {}, action) {
   }
 }
 
+function nearbyPlaces(state, action) {
+  let curState = state
+  if (! curState)
+    curState = new Set()
+
+  let newState = new Set()
+
+  // copy state
+  for (let item of curState)
+    newState.add(item)
+
+  console.log("Reducer. Nearby before: " + JSON.stringify([...newState]))
+
+  switch (action.type) {
+    case constants.NEARING_PLACE:
+        console.log("Reducer. Adding: " + action.placeId)
+        newState.add(action.placeId)
+        break;
+
+    case constants.LEAVING_PLACE:
+        console.log("Reducer. Deleting:" + action.placeId)
+        newState.delete(action.placeId)
+        break;
+  }
+  console.log("Reducer. Nearby after: " + JSON.stringify([...newState]))
+
+  return newState
+}
+
+// combined reducer
 const placesReducer = combineReducers({
   nav,
   newPlace,
-  places
+  places,
+  nearbyPlaces
 })
 
+// create the store with saga middleware
 function createPlacesStore(initialState) {
 
   console.log("Creating saga middleware.")

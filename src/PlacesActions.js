@@ -4,6 +4,9 @@ export const ADD_PLACE = 'add-place-action-type'
 export const SELECT_PLACE = 'select-place-action-type'
 export const PICK_LOCATION = 'select-location'
 export const CAPTURE_GEO_POSITION = 'record-geo-position'
+export const NEARING_PLACE = 'nearing-place'
+export const LEAVING_PLACE = 'leaving-place'
+
 //export const CAPTURE_NEARBY_PLACES = 'capture-nearby_places'
 
 export function createAction(actionType, actionData) {

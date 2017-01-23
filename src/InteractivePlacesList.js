@@ -6,7 +6,10 @@ import * as factory from './PlacesActions.js'
 
 const mapStateToProps = (state) => {
   return {
-    places: state.places
+    places: state.places,
+    isNearBy: function(google_place_id) {
+      return state.nearbyPlaces.has(google_place_id)
+    }
   }
 }
 
